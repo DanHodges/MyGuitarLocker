@@ -6,6 +6,8 @@ using Wildermuth.ViewModels;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
 using System.Net;
+using Wildermuth.Services;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,11 +18,13 @@ namespace Wildermuth.Controllers.API
     {
         private IWorldRepository _repository;
         private ILogger<StopController> _logger;
+        private CoordService _coordService;
 
-        public StopController(IWorldRepository repository, ILogger<StopController> logger)
+        public StopController(IWorldRepository repository, ILogger<StopController> logger, CoordService coordService )
         {
             _repository = repository;
             _logger = logger;
+            _coordService = coordService;
         }
 
         [HttpGet("")]
@@ -44,7 +48,7 @@ namespace Wildermuth.Controllers.API
             }
         }
 
-        public JsonResult Post(string tripName, [FromBody]StopViewModel vm)
+        public async Task<JsonResult> Post(string tripName, [FromBody]StopViewModel vm)
         {
             try
             {
@@ -53,7 +57,16 @@ namespace Wildermuth.Controllers.API
                     // Map to Entity
                     var newStop = Mapper.Map<Stop>(vm);
                     // Look up GeoCordinates
+                    var coordResult = await _coordService.Lookup(newStop.Name);
 
+                    if (!coordResult.Success)
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        Json(coordResult.Message);
+                    }
+
+                    newStop.Longitude = coordResult.Longitude;
+                    newStop.Latitude = coordResult.Latitude;
                     //Save to the Database
                     _repository.AddStop(tripName, newStop);
 

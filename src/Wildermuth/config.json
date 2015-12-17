@@ -1,6 +1,7 @@
 ﻿{
   "AppSettings": {
-    "SiteEmailAddress": "me@web.com"
+    "SiteEmailAddress": "me@web.com",
+    "BingKey": "Do not hardcode"
   },
   "Data": {
     "WorldContextConnection": "Server=(localdb)\\ProjectsV12;Database=WildermuthDB;Trusted_Connection=true;MultipleActiveResultSets=true"

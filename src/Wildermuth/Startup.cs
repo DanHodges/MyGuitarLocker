@@ -46,6 +46,7 @@ namespace Wildermuth
 
             services.AddLogging();
 
+            services.AddScoped<CoordService>();
             services.AddScoped<IWorldRepository, WorldRepository>();
 
         #if DEBUG
