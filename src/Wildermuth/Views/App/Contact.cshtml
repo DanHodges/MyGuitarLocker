@@ -1,0 +1,25 @@
+﻿@model Wildermuth.ViewModels.ContactViewModel
+@{
+    ViewBag.Title = "Welcome to Tonewood";
+}
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+<h1>My Kickin' Content</h1>
+<p>I I was a catfish swimmin' in the see I'd have all kinds of trouble swimmin' afta me ;)</p>
+<form method="post">
+    @if (ViewBag.Message != null) {<div>@ViewBag.Message</div> }
+    <div asp-validation-summary="ValidationSummary.ModelOnly"></div>
+    <label asp-for="Name">Name</label> 
+    <input asp-for="Name" />
+    <span asp-validation-for="Name"></span><br />
+    <label asp-for="Email">Email</label>
+    <input type="Email" asp-for="Email"/>
+    <span asp-validation-for="Email"></span><br />
+    <label asp-for="Message">Message</label><br />
+    <textarea cols="40" rows="4" asp-for="Message"></textarea>
+    <div>
+        <input type="submit" value="Send Messsage" />
+    </div>
+</form>

@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h1>@ViewBag.Title</h1>
+    <ul>
+        <li><a asp-controller="App" asp-action="Index">Home</a></li>
+        <li><a asp-controller="App" asp-action="About">About</a></li>
+        <li><a asp-controller="App" asp-action="Contact">Contact</a></li>
+    </ul>
+    <p>Shared layout</p>
+    <div>
+        @RenderBody()
+    </div>
+    <p>Shared layout</p>
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+
+    @*<script type="text/javascript" src="~/js/site.js"></script>*@
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

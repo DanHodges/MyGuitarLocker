@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Wildermuth.Models.Trip>
+@{
+    ViewBag.Title = "Welcome to Tonewood";
+}
+<h1>My Kickin' Index</h1>
+<p>I I was a catfish swimmin' in the see I'd have all kinds of trouble swimmin' afta me ;)</p>
+<ul>
+    @foreach (var trip in Model)
+    {
+        <li>@trip.Name (@trip.Created.ToShortDateString())</li>
+    }
+</ul>
