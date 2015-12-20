@@ -1,12 +1,13 @@
 ﻿@model IEnumerable<Wildermuth.Models.Trip>
 @{
-    ViewBag.Title = "Welcome to Tonewood";
+    ViewBag.Title = "Home Page";
 }
-<h1>My Kickin' Index</h1>
-<p>I I was a catfish swimmin' in the see I'd have all kinds of trouble swimmin' afta me ;)</p>
-<ul>
-    @foreach (var trip in Model)
-    {
-        <li>@trip.Name (@trip.Created.ToShortDateString())</li>
-    }
-</ul>
+<div class="row">
+
+    <div class="col-md-12">
+        <h1>Welcome to The World</h1>
+        <p>This app will allow you to plan for world trips</p>
+        <a asp-controller="App" asp-action="trips" class="btn btn-lg btn-success">View My Trips</a>
+    </div>
+
+</div>

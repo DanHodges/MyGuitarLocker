@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Wildermuth.ViewModels;
 using Wildermuth.Services;
 using Wildermuth.Models;
+using Microsoft.AspNet.Authorization;
 
 namespace Wildermuth.Controllers.Web
 {
@@ -20,6 +21,12 @@ namespace Wildermuth.Controllers.Web
             _repository = repository;
         }
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Trips()
         {
             var trips = _repository.GetAllTrips();
             return View(trips);
