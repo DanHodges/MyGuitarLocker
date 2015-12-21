@@ -8,11 +8,13 @@ using AutoMapper;
 using System.Net;
 using Wildermuth.Services;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Authorization;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Wildermuth.Controllers.API
 {
+    [Authorize]
     [Route("api/trips/{tripName}/stops")]
     public class StopController : Controller
     {
@@ -32,7 +34,7 @@ namespace Wildermuth.Controllers.API
         {
             try
             {
-                var results = _repository.GetTripByName(tripName);
+                var results = _repository.GetTripByName(tripName, User.Identity.Name);
                 if (results == null)
                 {
                     return Json(null);
@@ -68,7 +70,7 @@ namespace Wildermuth.Controllers.API
                     newStop.Longitude = coordResult.Longitude;
                     newStop.Latitude = coordResult.Latitude;
                     //Save to the Database
-                    _repository.AddStop(tripName, newStop);
+                    _repository.AddStop(tripName, newStop, User.Identity.Name);
 
                     if (_repository.SaveAll())
                     {

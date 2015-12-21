@@ -18,9 +18,9 @@ namespace Wildermuth.Models
             _logger = logger;
         }
 
-        public void AddStop(string tripName, Stop newStop)
+        public void AddStop(string tripName, Stop newStop, string userName)
         {
-            var theTrip = GetTripByName(tripName);
+            var theTrip = GetTripByName(tripName, userName);
             newStop.Order = theTrip.Stops.Max(s => s.Order) + 1;
             theTrip.Stops.Add(newStop);
             _context.Stops.Add(newStop);
@@ -60,15 +60,28 @@ namespace Wildermuth.Models
             }
         }
 
-        public Trip GetTripByName(string tripName)
+        public Trip GetTripByName(string tripName, string userName)
         {
-            var myVar = _context.Trips.Include(t => t.Stops)
-                .Where(t => t.Name == tripName)
-                .FirstOrDefault();
-
             return _context.Trips.Include(t => t.Stops)
-                .Where(t => t.Name == tripName)
-                .FirstOrDefault();
+                                 .Where(t => t.Name == tripName && t.UserName == userName)
+                                 .FirstOrDefault();
+        }
+
+        public IEnumerable<Trip> GetUserTrips(string name)
+        {
+            try
+            {
+                return _context.Trips
+                    .Include(t => t.Stops)
+                    .Where(t => t.UserName == name)
+                    .OrderBy(t => t.Name)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not get trips with stops from database", ex);
+                return null;
+            }
         }
 
         public bool SaveAll()

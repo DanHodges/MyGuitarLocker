@@ -15,6 +15,9 @@ using Wildermuth.Services;
 using Wildermuth.Models;
 using Wildermuth.ViewModels;
 using AutoMapper;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Authentication.Cookies;
+using Microsoft.AspNet.Mvc;
 
 namespace Wildermuth
 {
@@ -34,11 +37,41 @@ namespace Wildermuth
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddJsonOptions(opt =>
+            services.AddMvc(config => 
+            {
+#if !DEBUG
+                config.Filters.Add(new RequireHttpsAttribute());
+#endif
+            })
+            .AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
+
+            services.AddIdentity<WorldUser, IdentityRole>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequiredLength = 8;
+                config.Cookies.ApplicationCookie.LoginPath = "/Auth/Login";
+                config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
                 {
-                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                });
+                    OnRedirectToLogin = ctx => 
+                    {
+                        if (ctx.Request.Path.StartsWithSegments("/api") &&
+                            ctx.Response.StatusCode == (int)HttpStatusCode.OK)
+                        {
+                            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                        }
+                        else
+                        {
+                            ctx.Response.Redirect(ctx.RedirectUri);
+                        }
+                        return Task.FromResult(0);
+                    }
+                };
+            })
+            .AddEntityFrameworkStores<WorldContext>();
+
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<WorldContext>();
@@ -57,9 +90,13 @@ namespace Wildermuth
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, WorldContextSeedData seeder, ILoggerFactory loggerFactory)
+        public async void Configure(IApplicationBuilder app, WorldContextSeedData seeder, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddDebug(LogLevel.Warning);
+
+            app.UseStaticFiles();
+
+            app.UseIdentity();
 
             Mapper.Initialize(config =>
             {
@@ -67,8 +104,6 @@ namespace Wildermuth
                 config.CreateMap<Stop, StopViewModel>().ReverseMap();
             });
 
-            app.UseStaticFiles();
-            //app.UseStaticFiles();
             app.UseMvc(config =>
             {
                 config.MapRoute(
@@ -77,8 +112,7 @@ namespace Wildermuth
                     defaults: new { controller = "App", Action = "Index" }
                     );
             });
-
-            seeder.EnsureSeedData();
+            await seeder.EnsureSeedDataAsync();
         }
         // Entry point for the application.
         public static void Main(string[] args) => WebApplication.Run<Startup>(args);

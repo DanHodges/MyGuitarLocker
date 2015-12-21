@@ -8,9 +8,11 @@ using System.Net;
 using Wildermuth.ViewModels;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNet.Authorization;
 
 namespace Wildermuth.Controllers.API
 {
+    [Authorize]
     [Route("api/trips")]
     public class TripController : Controller
     {
@@ -27,7 +29,8 @@ namespace Wildermuth.Controllers.API
         [HttpGet("")]
         public JsonResult Get()
         {
-            var results = Mapper.Map<IEnumerable<TripViewModel>>(_repository.GetAllTrips());
+            var trips = _repository.GetUserTrips(User.Identity.Name);
+            var results = Mapper.Map<IEnumerable<TripViewModel>>(trips);
             return Json(new { results = results });
         }
 

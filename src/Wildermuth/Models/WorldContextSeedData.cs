@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,22 +9,36 @@ namespace Wildermuth.Models
     public class WorldContextSeedData
     {
         private WorldContext _context;
+        private UserManager<WorldUser> _userManager;
 
-        public WorldContextSeedData(WorldContext context)
+        public WorldContextSeedData(WorldContext context, UserManager<WorldUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        public void EnsureSeedData()
+        public async Task EnsureSeedDataAsync()
         {
-            if (!_context.Trips.Any())
+            if (await _userManager.FindByEmailAsync("dano@internet.com") == null)
             {
-                //Add New Data
-                var usTrip = new Trip()
+                //add the user
+                var newUser = new WorldUser()
                 {
-                    Name = "US Trip",
-                    Created = DateTime.UtcNow,
-                    Stops = new List<Stop>()
+                    UserName = "TheDano",
+                    Email = "dano@internet.com",
+                    FirstTrip = DateTime.UtcNow
+                };
+                await _userManager.CreateAsync(newUser, "P@ssw0rd!");
+            }
+                if (!_context.Trips.Any())
+                {
+                    //Add New Data
+                    var usTrip = new Trip()
+                    {
+                        Name = "US Trip",
+                        Created = DateTime.UtcNow,
+                        UserName = "TheDano",
+                        Stops = new List<Stop>()
                     {
                     new Stop() {  Name = "Atlanta, GA", Arrival = new DateTime(2014, 6, 4), Latitude = 33.748995, Longitude = -84.387982, Order = 0 },
                     new Stop() {  Name = "New York, NY", Arrival = new DateTime(2014, 6, 9), Latitude = 40.712784, Longitude = -74.005941, Order = 1 },
@@ -32,14 +47,16 @@ namespace Wildermuth.Models
                     new Stop() {  Name = "Seattle, WA", Arrival = new DateTime(2014, 8, 13), Latitude = 47.606209, Longitude = -122.332071, Order = 4 },
                     new Stop() {  Name = "Atlanta, GA", Arrival = new DateTime(2014, 8, 23), Latitude = 33.748995, Longitude = -84.387982, Order = 5 },
                     }
-                };
-                _context.Trips.Add(usTrip);
-                _context.Stops.AddRange(usTrip.Stops);
-                var worldTrip = new Trip()
-                {
-                    Name = "World Trip",
-                    Created = DateTime.UtcNow,
-                    Stops = new List<Stop>()
+                    };
+                    _context.Trips.Add(usTrip);
+                    _context.Stops.AddRange(usTrip.Stops);
+
+                    var worldTrip = new Trip()
+                    {
+                        Name = "World Trip",
+                        Created = DateTime.UtcNow,
+                        UserName = "TheDano",
+                        Stops = new List<Stop>()
                     {
                     new Stop() { Order = 0, Latitude =  33.748995, Longitude =  -84.387982, Name = "Atlanta, Georgia", Arrival = DateTime.Parse("Jun 3, 2014") },
                     new Stop() { Order = 1, Latitude =  48.856614, Longitude =  2.352222, Name = "Paris, France", Arrival = DateTime.Parse("Jun 4, 2014") },
@@ -98,11 +115,11 @@ namespace Wildermuth.Models
                     new Stop() { Order = 54, Latitude =  13.727896, Longitude =  100.524123, Name = "Bangkok, Thailand", Arrival = DateTime.Parse("May 24, 2015") },
                     new Stop() { Order = 55, Latitude =  33.748995, Longitude =  -84.387982, Name = "Atlanta, Georgia", Arrival = DateTime.Parse("Jun 17, 2015") },
                     }
-                };
-                _context.Trips.Add(worldTrip);
-                _context.Stops.AddRange(worldTrip.Stops);
-                _context.SaveChanges();
-            }
+                    };
+                    _context.Trips.Add(worldTrip);
+                    _context.Stops.AddRange(worldTrip.Stops);
+                    _context.SaveChanges();
+                }
         }
     }
 }
