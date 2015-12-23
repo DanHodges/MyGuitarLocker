@@ -42,8 +42,11 @@ namespace Wildermuth.Controllers.API
                 if (ModelState.IsValid)
                 {
                     var NewTrip = Mapper.Map<Trip>(vm);
-                    _logger.LogInformation("Attempting to save a new Trip");
+
+                    NewTrip.UserName = User.Identity.Name;
+
                     //Save to Database
+                    _logger.LogInformation("Attempting to save a new Trip");
                     _repository.AddTrip(NewTrip);
 
                     if (_repository.SaveAll())
