@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
-namespace Wildermuth.Services
+namespace MyGuitarLocker.Services
 {
     public class CoordService
     {

@@ -3,23 +3,23 @@
     "use strict";
 
     // Getting the existing module
-    angular.module("app-trips")
-      .controller("tripsController", tripsController);
+    angular.module("app-Instruments")
+      .controller("InstrumentsController", InstrumentsController);
 
-    function tripsController($http) {
+    function InstrumentsController($http) {
 
         var vm = this;
 
-        vm.trips = [];
+        vm.Instruments = [];
 
-        vm.newTrip = {};
+        vm.newInstrument = {};
 
         vm.errorMessage = "";
         vm.isBusy = true;
 
-        $http.get("/api/trips")
+        $http.get("/api/Instruments")
             .then(function (response) {
-                angular.copy(response.data.results, vm.trips);
+                angular.copy(response.data.results, vm.Instruments);
                 console.log("response :", response);
             }, function (error) {
                 vm.errorMessage = "Failed to load data " + error;
@@ -28,20 +28,20 @@
                 vm.isBusy = false;
             });
 
-        vm.addTrip  = function () {
+        vm.addInstrument  = function () {
             vm.isBusy = true;
             vm.errorMessage = "";
 
-            $http.post("/api/trips", vm.newTrip)
+            $http.post("/api/Instruments", vm.newInstrument)
                 .then(function (response) {
                     //success
-                    vm.trips.push(response.data);
+                    vm.Instruments.push(response.data);
                     console.log("success");
                     console.log("response.data :", response.data);
-                    vm.newTrip = {};
+                    vm.newInstrument = {};
                 }, function () {
                     //error
-                    vm.errorMessage = "Failed to save new trips";
+                    vm.errorMessage = "Failed to save new Instruments";
                 })
                 .finally(function () {
                     vm.isBusy = false;

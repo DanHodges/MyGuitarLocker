@@ -1,4 +1,4 @@
-﻿namespace Wildermuth.Services
+﻿namespace MyGuitarLocker.Services
 {
     public class CoordServiceResult
     {

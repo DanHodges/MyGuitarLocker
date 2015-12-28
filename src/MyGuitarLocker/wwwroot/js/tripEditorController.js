@@ -1,42 +1,42 @@
-﻿//tripEditorController.js
+﻿//InstrumentEditorController.js
 (function () {
     'use strict';
-    angular.module("app-trips")
-        .controller("tripEditorController", tripEditorController);
+    angular.module("app-Instruments")
+        .controller("InstrumentEditorController", InstrumentEditorController);
         
-    function tripEditorController($routeParams, $http) {
+    function InstrumentEditorController($routeParams, $http) {
         var vm = this;
-        vm.tripName = $routeParams.tripName;
-        vm.stops = [];
+        vm.InstrumentName = $routeParams.InstrumentName;
+        vm.SoundClips = [];
         vm.errorMessage = "";
         vm.isBusy = true;
-        vm.newStop = {};
+        vm.newSoundClip = {};
         
-        var url = "/api/trips/" + vm.tripName + "/stops";
+        var url = "/api/Instruments/" + vm.InstrumentName + "/SoundClips";
 
         $http.get(url)
           .then(function (response) {
-              angular.copy(response.data, vm.stops);
-              _showMap(vm.stops);
-              console.log("_showMap(vm.stops)")
+              angular.copy(response.data, vm.SoundClips);
+              _showMap(vm.SoundClips);
+              console.log("_showMap(vm.SoundClips)")
 ;          }, function (err) {
-              vm.errorMessage = "Failed to load stops";
+              vm.errorMessage = "Failed to load SoundClips";
           })
           .finally(function () {
               vm.isBusy = false;
           });
 
-        vm.addStop = function () {
+        vm.addSoundClip = function () {
             vm.isBusy = true;
-            $http.post(url, vm.newStop)
+            $http.post(url, vm.newSoundClip)
                 .then(function (response) {
                     //success
-                    vm.stops.push(response.data);
-                    _showMap(vm.stops);
-                    vm.newStop = {};
+                    vm.SoundClips.push(response.data);
+                    _showMap(vm.SoundClips);
+                    vm.newSoundClip = {};
                 }, function () {
                     //error
-                    vm.errorMessage = "Failed to save new stop";
+                    vm.errorMessage = "Failed to save new SoundClip";
                 })
                 .finally(function () {
                     vm.isBusy = false;
@@ -44,9 +44,9 @@
         }
     }
 
-    function _showMap(stops) {
-        if (stops && stops.length > 0) {
-            var mapStops = _.map(stops, function(item){
+    function _showMap(SoundClips) {
+        if (SoundClips && SoundClips.length > 0) {
+            var mapSoundClips = _.map(SoundClips, function(item){
                 return {
                     lat : item.latitude,
                     long: item.longitude,
@@ -56,9 +56,9 @@
             //show map
             console.log("_showMap()");
             travelMap.createMap({
-                stops: mapStops,
+                SoundClips: mapSoundClips,
                 selector: "#map",
-                currentStop: 1,
+                currentSoundClip: 1,
                 initialZoom: 3
             });
         }

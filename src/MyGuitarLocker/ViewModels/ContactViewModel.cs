@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Wildermuth.ViewModels
+namespace MyGuitarLocker.ViewModels
 {
     public class ContactViewModel
     {

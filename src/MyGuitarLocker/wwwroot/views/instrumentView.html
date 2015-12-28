@@ -1,0 +1,24 @@
+﻿<div>
+    <div class="text-danger" ng-show="vm.errorMessage"> {{vm.errorMessage}} </div>
+    <wait-cursor display-when="vm.isBusy"></wait-cursor>
+    <table>
+        <tr ng-repeat="Instrument in vm.Instruments">
+            <td>{{ Instrument.name }}</td>
+            <td>{{Instrument.created | date:'MM-dd-yyyy'}}</td>
+            <td><a ng-href="#/editor/{{ Instrument.name }}">Manage</a></td>
+        </tr>
+    </table>
+
+    <form novalidate name="newInstrumentForm" ng-submit="vm.addInstrument()">
+        <div class="form-group">
+            <label for="name">Instrument Name</label>
+            <input class="form-control" id="name" name="name" ng-model="vm.newInstrument.name" required ng-minlength="5" />
+            <span ng-show="newInstrumentForm.name.$error.required" class="text-warning">Name is Required</span>
+            <span ng-show="newInstrumentForm.name.$error.minlength" class="text-warning">Name must be 8 characters</span>
+        </div>
+        <div>
+            <input type="submit" value="Add" ng-disabled="newInstrumentForm.$invalid" />
+        </div>
+    </form>
+
+</div>

@@ -8,6 +8,7 @@
     "jquery-validation-unobtrusive": "~3.2.5",
     "angular": "1.4.8",
     "angular-route": "1.4.8",
-    "travelmap": "1.0.2"
+    "travelmap": "1.0.2",
+    "evaporatejs": "*"
   }
 }
