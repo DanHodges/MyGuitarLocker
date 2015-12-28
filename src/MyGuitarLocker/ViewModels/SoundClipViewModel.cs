@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Wildermuth.ViewModels
+namespace MyGuitarLocker.ViewModels
 {
-    public class StopViewModel
+    public class SoundClipViewModel
     {
         public int Id { get; set; }
 

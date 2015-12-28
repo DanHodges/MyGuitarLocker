@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Wildermuth.Models
+namespace MyGuitarLocker.Models
 {
-    public class Trip
+    public class Instrument
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Created { get; set; }
         public string UserName { get; set; }
-        public ICollection<Stop> Stops { get; set; }
+        public ICollection<SoundClip> SoundClips { get; set; }
     }
 }

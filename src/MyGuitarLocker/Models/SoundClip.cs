@@ -1,7 +1,7 @@
 ﻿using System;
-namespace Wildermuth.Models
+namespace MyGuitarLocker.Models
 {
-    public class Stop
+    public class SoundClip
     {
         public int Id { get; set; }
         public string Name { get; set; }

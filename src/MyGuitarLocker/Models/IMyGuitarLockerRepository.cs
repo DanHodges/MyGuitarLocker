@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 
-namespace Wildermuth.Models
+namespace MyGuitarLocker.Models
 {
-    public interface IWorldRepository
+    public interface IMyGuitarLockerRepository
     {
-        IEnumerable<Trip> GetAllTrips();
-        IEnumerable<Trip> GetAllTripsWithStops();
-        void AddTrip(Trip newTrip);
+        IEnumerable<Instrument> GetAllInstruments();
+        IEnumerable<Instrument> GetAllInstrumentsWithSoundClips();
+        void AddInstrument(Instrument newInstrument);
         bool SaveAll();
-        Trip GetTripByName(string tripName, string userName);
-        void AddStop(string tripName, Stop newStop, string userName);
-        IEnumerable<Trip> GetUserTrips(string name);
+        Instrument GetInstrumentByName(string InstrumentName, string userName);
+        void AddSoundClip(string InstrumentName, SoundClip newSoundClip, string userName);
+        IEnumerable<Instrument> GetUserInstruments(string name);
     }
 }

@@ -3,19 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Wildermuth.ViewModels;
-using Wildermuth.Services;
-using Wildermuth.Models;
+using MyGuitarLocker.ViewModels;
+using MyGuitarLocker.Services;
+using MyGuitarLocker.Models;
 using Microsoft.AspNet.Authorization;
 
-namespace Wildermuth.Controllers.Web
+namespace MyGuitarLocker.Controllers.Web
 {
     public class AppController : Controller
     {
         private IMailService _mailService;
-        private IWorldRepository _repository;
+        private IMyGuitarLockerRepository _repository;
 
-        public AppController(IMailService service, IWorldRepository repository)
+        public AppController(IMailService service, IMyGuitarLockerRepository repository)
         {
             _mailService = service;
             _repository = repository;
@@ -26,10 +26,10 @@ namespace Wildermuth.Controllers.Web
         }
 
         [Authorize]
-        public IActionResult Trips()
+        public IActionResult Instruments()
         {
-            var trips = _repository.GetAllTrips();
-            return View(trips);
+            var Instruments = _repository.GetAllInstruments();
+            return View(Instruments);
         }
         public IActionResult About()
         {

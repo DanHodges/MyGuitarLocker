@@ -3,28 +3,28 @@
         <a href="#/" class="btn">back</a>
     </div>
     <div class="col-md-6">
-        <h2>{{vm.tripName}}</h2>
+        <h2>{{vm.InstrumentName}}</h2>
         <wait-cursor display-when="vm.isBusy"></wait-cursor>
         <div class="alert alert-danger" ng-show="vm.errorMessage">{{ vm.errorMessage }}</div>
 
-        <form novalidate name="newStopForm" ng-submit="vm.addStop()">
+        <form novalidate name="newSoundClipForm" ng-submit="vm.addSoundClip()">
             <div class="form-group">
                 <label>Date</label>
                 <input class="form-control" id="arrival" name="arrival" 
-                       ng-model="vm.newStop.arrival" 
+                       ng-model="vm.newSoundClip.arrival" 
                        required 
                        ng-pattern="/^(\d{2})\/(\d{2})\/(\d{4})$/" />
-                <span class="text-danger" ng-show="newStopForm.arrival.$error.required">Required</span>
-                <span class="text-danger" ng-show="newStopForm.arrival.$error.pattern">MM/DD/YYYY Format Required</span>
+                <span class="text-danger" ng-show="newSoundClipForm.arrival.$error.required">Required</span>
+                <span class="text-danger" ng-show="newSoundClipForm.arrival.$error.pattern">MM/DD/YYYY Format Required</span>
             </div>
             <div class="form-group">
                 <label>Location</label>
-                <input class="form-control" id="name" name="name" ng-model="vm.newStop.name" required ng-minlength="5"/>
-                <span class="text-danger" ng-show="newStopForm.name.$error.required">Required</span>
-                <span class="text-danger" ng-show="newStopForm.name.$error.minlength">Must 5 >= 5</span>
+                <input class="form-control" id="name" name="name" ng-model="vm.newSoundClip.name" required ng-minlength="5"/>
+                <span class="text-danger" ng-show="newSoundClipForm.name.$error.required">Required</span>
+                <span class="text-danger" ng-show="newSoundClipForm.name.$error.minlength">Must 5 >= 5</span>
             </div>
             <div>
-                <input type="submit" value="Add" class="btn btn-success" ng-disabled="newStopForm.$invalid"/>
+                <input type="submit" value="Add" class="btn btn-success" ng-disabled="newSoundClipForm.$invalid"/>
             </div>
         </form>
 
@@ -33,9 +33,9 @@
                 <th>Location</th>
                 <th>Arrival</th>
             </tr>
-            <tr ng-repeat="stop in vm.stops">
-                <td>{{stop.name}}</td>
-                <td>{{stop.arrival | date:shortDate}}</td>
+            <tr ng-repeat="SoundClip in vm.SoundClips">
+                <td>{{SoundClip.name}}</td>
+                <td>{{SoundClip.arrival | date:shortDate}}</td>
             </tr>
         </table>
     </div>

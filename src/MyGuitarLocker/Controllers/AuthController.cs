@@ -4,16 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Wildermuth.Models;
-using Wildermuth.ViewModels;
+using MyGuitarLocker.Models;
+using MyGuitarLocker.ViewModels;
 
-namespace Wildermuth.Controllers
+namespace MyGuitarLocker.Controllers
 {
     public class AuthController : Controller
     {
-        private SignInManager<WorldUser> _signInManager;
+        private SignInManager<MyGuitarLockerUser> _signInManager;
 
-        public AuthController(SignInManager<WorldUser> signInManager)
+        public AuthController(SignInManager<MyGuitarLockerUser> signInManager)
         {
             _signInManager = signInManager;
         }
@@ -21,7 +21,7 @@ namespace Wildermuth.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Trips", "App");
+                return RedirectToAction("Instruments", "App");
             }
             return View();
         }
@@ -37,7 +37,7 @@ namespace Wildermuth.Controllers
                 {
                     if (string.IsNullOrWhiteSpace(returnUrl))
                     {
-                         return RedirectToAction("Trips", "App");
+                         return RedirectToAction("Instruments", "App");
                     }
                     else
                     {

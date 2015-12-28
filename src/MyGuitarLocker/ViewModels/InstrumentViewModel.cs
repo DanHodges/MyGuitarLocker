@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Wildermuth.ViewModels
+namespace MyGuitarLocker.ViewModels
 {
-    public class TripViewModel
+    public class InstrumentViewModel
     {
         public int Id { get; set; }
 
@@ -16,7 +16,7 @@ namespace Wildermuth.ViewModels
 
         public DateTime Created { get; set; } = DateTime.UtcNow;
 
-        public IEnumerable<StopViewModel> Stops { get; set; }
+        public IEnumerable<SoundClipViewModel> SoundClips { get; set; }
 
     }
 }

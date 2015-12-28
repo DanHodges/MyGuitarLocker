@@ -5,81 +5,81 @@ using System.Threading.Tasks;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Logging;
 
-namespace Wildermuth.Models
+namespace MyGuitarLocker.Models
 {
-    public class WorldRepository : IWorldRepository
+    public class MyGuitarLockerRepository : IMyGuitarLockerRepository
     {
-        public WorldContext _context;
-        private ILogger<WorldRepository> _logger;
+        public MyGuitarLockerContext _context;
+        private ILogger<MyGuitarLockerRepository> _logger;
 
-        public WorldRepository(WorldContext context, ILogger<WorldRepository> logger)
+        public MyGuitarLockerRepository(MyGuitarLockerContext context, ILogger<MyGuitarLockerRepository> logger)
         {
             _context = context;
             _logger = logger;
         }
 
-        public void AddStop(string tripName, Stop newStop, string userName)
+        public void AddSoundClip(string InstrumentName, SoundClip newSoundClip, string userName)
         {
-            var theTrip = GetTripByName(tripName, userName);
-            newStop.Order = theTrip.Stops.Max(s => s.Order) + 1;
-            theTrip.Stops.Add(newStop);
-            _context.Stops.Add(newStop);
+            var theInstrument = GetInstrumentByName(InstrumentName, userName);
+            newSoundClip.Order = theInstrument.SoundClips.Max(s => s.Order) + 1;
+            theInstrument.SoundClips.Add(newSoundClip);
+            _context.SoundClips.Add(newSoundClip);
         }
 
-        public void AddTrip(Trip newTrip)
+        public void AddInstrument(Instrument newInstrument)
         {
-            _context.Add(newTrip);
+            _context.Add(newInstrument);
         }
 
-        public IEnumerable<Trip> GetAllTrips()
+        public IEnumerable<Instrument> GetAllInstruments()
         {
             try
             {
-                return _context.Trips.OrderBy(t => t.Name).ToList();
+                return _context.Instruments.OrderBy(t => t.Name).ToList();
             }
             catch (Exception ex)
             {
-                _logger.LogError("Could not get trips from database", ex);
+                _logger.LogError("Could not get Instruments from database", ex);
                 return null;
             }
         }
 
-        public IEnumerable<Trip> GetAllTripsWithStops()
+        public IEnumerable<Instrument> GetAllInstrumentsWithSoundClips()
         {
             try
             {
-                return _context.Trips
-                    .Include(t => t.Stops)
+                return _context.Instruments
+                    .Include(t => t.SoundClips)
                     .OrderBy(t => t.Name)
                     .ToList();
             }
             catch (Exception ex)
             {
-                _logger.LogError("Could not get trips with stops from database", ex);
+                _logger.LogError("Could not get Instruments with SoundClips from database", ex);
                 return null;
             }
         }
 
-        public Trip GetTripByName(string tripName, string userName)
+        public Instrument GetInstrumentByName(string InstrumentName, string userName)
         {
-            return _context.Trips.Include(t => t.Stops)
-                                 .Where(t => t.Name == tripName && t.UserName == userName)
+            return _context.Instruments.Include(t => t.SoundClips)
+                                 .Where(t => t.Name == InstrumentName && t.UserName == userName)
                                  .FirstOrDefault();
         }
 
-        public IEnumerable<Trip> GetUserTrips(string name)
+        public IEnumerable<Instrument> GetUserInstruments(string name)
         {
             try
             {
-                return _context.Trips
-                    .Include(t => t.Stops)
+                return _context.Instruments
+                    .Include(t => t.SoundClips)
                     .Where(t => t.UserName == name)
                     .OrderBy(t => t.Name)
                     .ToList();
             }
             catch (Exception ex)
             {
-                _logger.LogError("Could not get trips with stops from database", ex);
+                _logger.LogError("Could not get Instruments with SoundClips from database", ex);
                 return null;
             }
         }
