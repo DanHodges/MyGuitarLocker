@@ -3,14 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{28470C6E-A975-4A82-80EE-4D4967CFBD7F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{96FD6A58-8339-4EDD-9DED-5022C8F8B63F}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Wildermuth", "src\Wildermuth\Wildermuth.xproj", "{830FCE3F-EA0D-4023-8363-D6D10BFEA7E9}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MyGuitarLocker", "src\MyGuitarLocker\MyGuitarLocker.xproj", "{830FCE3F-EA0D-4023-8363-D6D10BFEA7E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,8 +18,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{830FCE3F-EA0D-4023-8363-D6D10BFEA7E9} = {28470C6E-A975-4A82-80EE-4D4967CFBD7F}
 	EndGlobalSection
 EndGlobal
