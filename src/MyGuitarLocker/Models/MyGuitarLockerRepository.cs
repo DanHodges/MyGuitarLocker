@@ -21,7 +21,6 @@ namespace MyGuitarLocker.Models
         public void AddSoundClip(string InstrumentName, SoundClip newSoundClip, string userName)
         {
             var theInstrument = GetInstrumentByName(InstrumentName, userName);
-            newSoundClip.Order = theInstrument.SoundClips.Max(s => s.Order) + 1;
             theInstrument.SoundClips.Add(newSoundClip);
             _context.SoundClips.Add(newSoundClip);
         }
@@ -73,6 +72,7 @@ namespace MyGuitarLocker.Models
             {
                 return _context.Instruments
                     .Include(t => t.SoundClips)
+                    .Include(t => t.Images)
                     .Where(t => t.UserName == name)
                     .OrderBy(t => t.Name)
                     .ToList();

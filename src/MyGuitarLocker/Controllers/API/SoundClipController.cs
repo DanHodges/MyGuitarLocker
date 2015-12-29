@@ -50,43 +50,43 @@ namespace MyGuitarLocker.Controllers.API
             }
         }
 
-        public async Task<JsonResult> Post(string InstrumentName, [FromBody]SoundClipViewModel vm)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    // Map to Entity
-                    var newSoundClip = Mapper.Map<SoundClip>(vm);
-                    // Look up GeoCordinates
-                    var coordResult = await _coordService.Lookup(newSoundClip.Name);
+        //public async Task<JsonResult> Post(string InstrumentName, [FromBody]SoundClipViewModel vm)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            // Map to Entity
+        //            var newSoundClip = Mapper.Map<SoundClip>(vm);
+        //            // Look up GeoCordinates
+        //            var coordResult = await _coordService.Lookup(newSoundClip.Name);
 
-                    if (!coordResult.Success)
-                    {
-                        Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        Json(coordResult.Message);
-                    }
+        //            if (!coordResult.Success)
+        //            {
+        //                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+        //                Json(coordResult.Message);
+        //            }
 
-                    newSoundClip.Longitude = coordResult.Longitude;
-                    newSoundClip.Latitude = coordResult.Latitude;
-                    //Save to the Database
-                    _repository.AddSoundClip(InstrumentName, newSoundClip, User.Identity.Name);
+        //            newSoundClip.Longitude = coordResult.Longitude;
+        //            newSoundClip.Latitude = coordResult.Latitude;
+        //            //Save to the Database
+        //            _repository.AddSoundClip(InstrumentName, newSoundClip, User.Identity.Name);
 
-                    if (_repository.SaveAll())
-                    {
-                        Response.StatusCode = (int)HttpStatusCode.Created;
-                        return Json(Mapper.Map<SoundClipViewModel>(newSoundClip));
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Failed to get {InstrumentName}", ex.Message);
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return Json("Failed to save new SoundClip");
-            }
-            Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            return Json("Validation failed on new SoundClip");
-        }
+        //            if (_repository.SaveAll())
+        //            {
+        //                Response.StatusCode = (int)HttpStatusCode.Created;
+        //                return Json(Mapper.Map<SoundClipViewModel>(newSoundClip));
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError($"Failed to get {InstrumentName}", ex.Message);
+        //        Response.StatusCode = (int)HttpStatusCode.BadRequest;
+        //        return Json("Failed to save new SoundClip");
+        //    }
+        //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+        //    return Json("Validation failed on new SoundClip");
+        //}
     }
 }

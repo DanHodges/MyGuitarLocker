@@ -26,7 +26,7 @@ namespace MyGuitarLocker.Controllers.Web
         }
 
         [Authorize]
-        public IActionResult Instruments()
+        public IActionResult App()
         {
             var Instruments = _repository.GetAllInstruments();
             return View(Instruments);

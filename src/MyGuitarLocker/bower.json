@@ -9,6 +9,7 @@
     "angular": "1.4.8",
     "angular-route": "1.4.8",
     "travelmap": "1.0.2",
-    "evaporatejs": "*"
+    "evaporatejs": "*",
+    "angular-audio": "1.7.1"
   }
 }

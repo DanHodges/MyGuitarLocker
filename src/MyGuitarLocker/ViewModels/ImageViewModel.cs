@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MyGuitarLocker.ViewModels
+namespace Wildermuth.ViewModels
 {
-    public class SoundClipViewModel
+    public class ImageViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Url { get; set; }
-        //public DateTime Uploaded { get; set; } = DateTime.UtcNow;
-        public string Description { get; set; }
-        public string Recording_Gear { get; set; }
+        public string Name { get; set; }
+        public DateTime Uploaded { get; set; } = DateTime.UtcNow;
+        //public string Description { get; set; }
     }
 }

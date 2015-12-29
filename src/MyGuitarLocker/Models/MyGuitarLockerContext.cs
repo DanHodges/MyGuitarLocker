@@ -15,6 +15,7 @@ namespace MyGuitarLocker.Models
         }
         public DbSet<Instrument> Instruments { get; set; }
         public DbSet<SoundClip> SoundClips { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -18,6 +18,7 @@ using AutoMapper;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Authentication.Cookies;
 using Microsoft.AspNet.Mvc;
+using Wildermuth.ViewModels;
 
 namespace MyGuitarLocker
 {
@@ -102,6 +103,7 @@ namespace MyGuitarLocker
             {
                 config.CreateMap<Instrument, InstrumentViewModel>().ReverseMap();
                 config.CreateMap<SoundClip, SoundClipViewModel>().ReverseMap();
+                config.CreateMap<Image, ImageViewModel>().ReverseMap();
             });
 
             app.UseMvc(config =>

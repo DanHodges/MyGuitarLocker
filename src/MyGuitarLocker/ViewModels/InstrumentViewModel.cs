@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyGuitarLocker.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,14 +10,10 @@ namespace MyGuitarLocker.ViewModels
     public class InstrumentViewModel
     {
         public int Id { get; set; }
-
-        [Required]
-        [StringLength(255, MinimumLength = 5)]
         public string Name { get; set; }
-
-        public DateTime Created { get; set; } = DateTime.UtcNow;
-
-        public IEnumerable<SoundClipViewModel> SoundClips { get; set; }
-
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public int Year { get; set; }
+        //public DateTime Uploaded { get; set; } = DateTime.UtcNow;
     }
 }

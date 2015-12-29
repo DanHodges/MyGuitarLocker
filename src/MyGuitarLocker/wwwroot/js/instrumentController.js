@@ -20,7 +20,7 @@
         $http.get("/api/Instruments")
             .then(function (response) {
                 angular.copy(response.data.results, vm.Instruments);
-                console.log("response :", response);
+                console.log("response :", response.data.results);
             }, function (error) {
                 vm.errorMessage = "Failed to load data " + error;
             })
