@@ -4,9 +4,9 @@
 
     // Getting the existing module
     angular.module("app-Instruments")
-      .controller("InstrumentsController", InstrumentsController);
+      .controller("instrumentsController", instrumentsController);
 
-    function InstrumentsController($http) {
+    function instrumentsController($http) {
 
         var vm = this;
 

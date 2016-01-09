@@ -1,0 +1,6 @@
+﻿<div ng-repeat="user in vm.users">
+    <h4>{{user.user}}</h4>
+    <a ng-href="#/locker/{{ user.user }}">
+        <img ng-src="{{user.pic}}" />
+    </a>
+</div>

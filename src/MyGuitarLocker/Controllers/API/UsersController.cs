@@ -14,7 +14,6 @@ using Microsoft.AspNet.Authorization;
 
 namespace MyGuitarLocker.Controllers.API
 {
-    [Authorize]
     [Route("api/Users")]
     public class UsersController : Controller
     {

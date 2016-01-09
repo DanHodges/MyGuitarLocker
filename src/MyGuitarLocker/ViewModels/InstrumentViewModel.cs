@@ -14,6 +14,7 @@ namespace MyGuitarLocker.ViewModels
         public string Make { get; set; }
         public string Model { get; set; }
         public int Year { get; set; }
+        public string Thumbnail { get; set; } = "http://www.clipartbest.com/cliparts/aiq/eBa/aiqeBae7T.svg";
         //public DateTime Uploaded { get; set; } = DateTime.UtcNow;
     }
 }

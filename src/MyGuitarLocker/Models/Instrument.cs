@@ -14,6 +14,7 @@ namespace MyGuitarLocker.Models
         public int Year { get; set; }
         //public DateTime Uploaded { get; set; }
         public string UserName { get; set; }
+        public string Thumbnail { get; set; } = "http://www.clipartbest.com/cliparts/aiq/eBa/aiqeBae7T.svg";
         public ICollection<SoundClip> SoundClips { get; set; }
         public ICollection<Image> Images { get; set; }
     }

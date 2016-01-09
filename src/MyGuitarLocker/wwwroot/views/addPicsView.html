@@ -1,29 +1,21 @@
-﻿<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1>Upload Images</h1>
-            <input id="files" type="file" multiple="multiple" ng-model="files">
-            <!--<button ng-click="upload()">upload</button>-->
-            <ul>
-                <li ng-repeat="file in files" ng-show="file.completed"><a ng-href="{{file.url}}" target="_blank">{{file.name}} completed</a></li>
-            </ul>
-            <div ng-repeat="file in files" ng-show="!file.completed" class="progress">
-                <div role="progressbar" aria-valuenow="{{file.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress}}%;" class="progress-bar">
-                    <span class="sr-only">{{file.progress}}% Complete</span>
-                </div>
-                <span class="progress-type">{{file.name}} {{file.timeLeft}}s left</span>
-                <span class="progress-completed">{{file.progress}}%</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<form novalidate name="newImageForm" ng-submit="vm.addImage()">
+﻿<form novalidate name="newImageForm" ng-submit="vm.addImage()">
     <div class="form-group">
         <label for="name">Collection Title</label><br />
         <input class="form-control" id="title" name="title" ng-model="vm.newImage.title" required ng-minlength="3" /><br />
         <label for="name">Description</label><br />
         <input class="form-control" id="description" name="description" ng-model="vm.newImage.description" /><br />
+        <label for="name">Thumbnail</label><br />
+        <input id="files" type="file" ng-model="files">
+        <ul>
+            <li ng-repeat="file in files" ng-show="file.completed"><a ng-href="{{file.url}}" target="_blank">{{file.name}} completed</a></li>
+        </ul>
+        <div ng-repeat="file in files" ng-show="!file.completed" class="progress">
+            <div role="progressbar" aria-valuenow="{{file.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress}}%;" class="progress-bar">
+                <span class="sr-only">{{file.progress}}% Complete</span>
+            </div>
+            <span class="progress-type">{{file.name}} {{file.timeLeft}}s left</span>
+            <span class="progress-completed">{{file.progress}}%</span>
+        </div>
     </div>
     <div>
         <input type="submit" value="Upload" ng-disabled="newImageForm.$invalid" ng-click="upload()" />

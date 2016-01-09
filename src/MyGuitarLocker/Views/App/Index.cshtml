@@ -2,12 +2,25 @@
 @{
     ViewBag.Title = "Home Page";
 }
+@section Scripts {
+    <script src="~/lib/underscore/underscore-min.js"></script>
+    <script src="~/lib/angular/angular.min.js"></script>
+    <script src="~/lib/angular-route/angular-route.min.js"></script>
+    <script src="~/lib/angular-audio/app/angular.audio.js"></script>
+    <script src="~/lib/evaporatejs/evaporate.js"></script>
+    <script src="~/js/app-browse.js"></script>
+    <script src="~/js/userController.js"></script>
+    <script src="~/js/browseUsersController.js"></script>
+    <script src="~/js/browseInstrumentController.js"></script>
+
+}
 <div class="row">
-
     <div class="col-md-12">
-        <h1>Welcome to The MyGuitarLocker</h1>
-        <p>This app will allow you to plan for MyGuitarLocker Instruments</p>
-        <a asp-controller="App" asp-action="app" class="btn btn-lg btn-success">View My Instruments</a>
+        <h1>MyGuitarLocker</h1>
+        <a asp-controller="App" asp-action="app" class="btn btn-lg btn-success">My Instruments</a>
     </div>
-
 </div>
+<div class="row" ng-app="app-browse">
+    <div ng-view></div>
+</div>
+

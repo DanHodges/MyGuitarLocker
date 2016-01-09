@@ -5,14 +5,14 @@
     angular.module("app-Instruments", ["simpleControls", "ngRoute", "ngAudio"])
         .config(function ($routeProvider) {
             $routeProvider.when("/", {
-                controller: "InstrumentsController",
+                controller: "instrumentsController",
                 controllerAs: "vm",
-                templateUrl: "/views/InstrumentView.html"
+                templateUrl: "/views/instrumentsView.html"
             });
             $routeProvider.when("/editor/:InstrumentName", {
-                controller: "InstrumentEditorController",
+                controller: "instrumentEditorController",
                 controllerAs: "vm",
-                templateUrl: "/views/InstrumentEditorView.html"
+                templateUrl: "/views/instrumentEditorView.html"
             });
             $routeProvider.when("/editor/:InstrumentName/addClips", {
                 controller: "addClipsController",
@@ -23,6 +23,11 @@
                 controller: "addPicsController",
                 controllerAs: "vm",
                 templateUrl: "/views/addPicsView.html"
+            });
+            $routeProvider.when("/addInstrument", {
+                controller: "addInstrumentController",
+                controllerAs: "vm",
+                templateUrl: "/views/addInstrumentView.html"
             });
             $routeProvider.otherwise({ redirectTo: "/" });
         });

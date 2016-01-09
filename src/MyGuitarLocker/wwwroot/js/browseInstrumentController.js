@@ -1,19 +1,20 @@
 ﻿//InstrumentEditorController.js
 (function () {
     'use strict';
-    angular.module("app-Instruments")
-        .controller("instrumentEditorController", instrumentEditorController);
-        
-    function instrumentEditorController($routeParams, $http, ngAudio) {
+    angular.module("app-browse")
+        .controller("browseInstrumentController", browseInstrumentController);
+
+    function browseInstrumentController ($routeParams, $http, ngAudio) {
         var vm = this;
         vm.InstrumentName = $routeParams.InstrumentName;
+        vm.user = $routeParams.user;
         vm.SoundClips = [];
         vm.Images = [];
         vm.errorMessage = "";
         vm.isBusy = true;
-        
-        var soundUrl = "/api/Instruments/" + vm.InstrumentName + "/SoundClips";
-        var picUrl = "/api/Instruments/" + vm.InstrumentName + "/Images";
+
+        var soundUrl = "/api/Instruments/" + vm.InstrumentName + "/SoundClips/" + vm.user;
+        var picUrl = "/api/Instruments/" + vm.InstrumentName + "/Images/" + vm.user;
 
         $http.get(soundUrl)
           .then(function (response) {
@@ -27,7 +28,7 @@
                       title: response.data[i].title
                   };
               }
-              console.log('vm.SoundClips', vm.SoundClips);   
+              console.log('vm.SoundClips', vm.SoundClips);
           }, function (err) {
               vm.errorMessage = "Failed to load SoundClips";
           })
@@ -43,7 +44,7 @@
                       title: response.data[i].title,
                       id: response.data[i].id,
                       description: response.data[i].description,
-                      urls : response.data[i].url.split(' ')
+                      urls: response.data[i].url.split(' ')
                   };
               }
               console.log('vm.Images', vm.Images);

@@ -27,7 +27,6 @@
       var files = $('#files')[0].files;
       for (var i = 0; i < files.length; i++) { $scope.files.push(files[i]);}
 
-      //$scope.$apply();
       $scope.files.forEach(function (file) {
         var fileKey = 'tmp/' + file.name;
         file.url = s3Url + '/' + fileKey;

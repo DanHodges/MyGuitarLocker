@@ -1,0 +1,31 @@
+﻿<div>
+    <a ng-href="#/addInstrument/">Add Instrument to My Locker</a>
+</div>
+<div>
+    <div class="text-danger" ng-show="vm.errorMessage"> {{vm.errorMessage}} </div>
+    <wait-cursor display-when="vm.isBusy"></wait-cursor>
+    <table>
+        <tr ng-repeat="Instrument in vm.Instruments">
+            <td>{{ Instrument.name }}</td>
+            <td><a ng-href="#/editor/{{ Instrument.name }}">Manage</a></td>
+        </tr>
+    </table>
+    <br />
+
+</div>
+<!--<form novalidate name="newInstrumentForm" ng-submit="vm.addInstrument()">
+    <label>Add Instrument</label>
+    <div class="form-group">
+        <label for="name">Instrument Name</label><br />
+        <input class="form-control" id="name" name="name" ng-model="vm.newInstrument.name" required ng-minlength="3" /><br />
+        <label for="name">Make</label><br />
+        <input class="form-control" id="make" name="make" ng-model="vm.newInstrument.make"  /><br />
+        <label for="name">Model</label><br />
+        <input class="form-control" id="model" name="model" ng-model="vm.newInstrument.model" /><br />
+        <label for="name">Year</label><br />
+        <input class="form-control" id="year" name="year" ng-model="vm.newInstrument.year" /><br />
+    </div>
+    <div>
+        <input type="submit" value="Add" ng-disabled="newInstrumentForm.$invalid" />
+    </div>
+</form>-->

@@ -1,0 +1,7 @@
+﻿<div ng-repeat="instrument in vm.instruments">
+    <h3>{{instrument.name}}</h3>
+    <p>The {{instrument.year}} {{instrument.make}} {{instrument.model}}</p>
+    <a ng-href="#/locker/{{vm.user}}/{{instrument.name}}">
+        <img ng-src="{{instrument.thumbnail}}" />
+    </a>
+</div>
