@@ -34,6 +34,15 @@ namespace MyGuitarLocker.Controllers.API
             return Json(new { results = results });
         }
 
+        [Route("{user}")]
+        [HttpGet("{user}")]
+        public JsonResult Get(string user)
+        {
+            var Instruments = _repository.GetUserInstruments(user);
+            var results = Mapper.Map<IEnumerable<InstrumentViewModel>>(Instruments);
+            return Json(new { results = results });
+        }
+
         [HttpPost("")]
         public JsonResult Post([FromBody]InstrumentViewModel vm)
         {

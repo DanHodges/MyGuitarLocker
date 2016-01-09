@@ -9,9 +9,11 @@ namespace MyGuitarLocker.ViewModels
     public class SoundClipViewModel
     {
         public int Id { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public string Url { get; set; }
-        //public DateTime Uploaded { get; set; } = DateTime.UtcNow;
+        public DateTime Uploaded { get; set; } = DateTime.UtcNow;
         public string Description { get; set; }
         public string Recording_Gear { get; set; }
     }

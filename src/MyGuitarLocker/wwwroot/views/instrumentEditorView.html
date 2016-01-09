@@ -9,7 +9,6 @@
         <wait-cursor display-when="vm.isBusy"></wait-cursor>
         <div class="alert alert-danger" ng-show="vm.errorMessage">{{ vm.errorMessage }}</div>
 
-
         <table>
             <tr>
                 <th>Title</th>
@@ -39,6 +38,15 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-md-3" ng-repeat="pic in vm.Images">
+            <h4>{{pic.title}}</h4>
+            <p>{{pic.description}}</p>
+            <a href="#" class="thumbnail">
+                <img ng-repeat="url in pic.urls" img ng-src="{{url}}" alt="{{pic.description}}">
+            </a>
+        </div>
     </div>
 </div>
     <!--<form novalidate name="newSoundClipForm" ng-submit="vm.addSoundClip()">

@@ -9,10 +9,11 @@ namespace Wildermuth.ViewModels
     public class ImageViewModel
     {
         public int Id { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public string Url { get; set; }
-        public string Name { get; set; }
         public DateTime Uploaded { get; set; } = DateTime.UtcNow;
-        //public string Description { get; set; }
+        public string Description { get; set; }
     }
 }

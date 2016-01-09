@@ -25,9 +25,21 @@ namespace MyGuitarLocker.Models
             _context.SoundClips.Add(newSoundClip);
         }
 
+        public void AddImage(string InstrumentName, Image newImage, string userName)
+        {
+            var theInstrument = GetInstrumentByName(InstrumentName, userName);
+            theInstrument.Images.Add(newImage);
+            _context.Images.Add(newImage);
+        }
+
         public void AddInstrument(Instrument newInstrument)
         {
             _context.Add(newInstrument);
+        }
+
+        public IEnumerable<object> GetAllUsers() {
+            IEnumerable<object> users = from User in _context.Users select new {user= User.UserName,pic = User.ProfilePic };
+            return users;
         }
 
         public IEnumerable<Instrument> GetAllInstruments()
@@ -63,6 +75,7 @@ namespace MyGuitarLocker.Models
         {
             return _context.Instruments.Include(t => t.SoundClips)
                                  .Where(t => t.Name == InstrumentName && t.UserName == userName)
+                                 .Include(t => t.Images).Where(t => t.Name == InstrumentName && t.UserName == userName)
                                  .FirstOrDefault();
         }
 
@@ -88,5 +101,6 @@ namespace MyGuitarLocker.Models
         {
             return _context.SaveChanges() > 0;
         }
+
     }
 }

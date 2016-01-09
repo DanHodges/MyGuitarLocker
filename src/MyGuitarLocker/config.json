@@ -5,5 +5,11 @@
   },
   "Data": {
     "MyGuitarLockerContextConnection": "Server=(localdb)\\ProjectsV12;Database=MyGuitarLockerDB;Trusted_Connection=true;MultipleActiveResultSets=true"
+  },
+  "evaporateOptions": {
+    "signerUrl": "/api/Sign",
+    "aws_key": "AKIAIGHISJZUQSPAWXBA",
+    "bucket": "guitarlocker-pics",
+    "logging": "true"
   }
 }

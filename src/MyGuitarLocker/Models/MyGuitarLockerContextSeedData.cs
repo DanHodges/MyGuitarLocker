@@ -49,7 +49,8 @@ namespace MyGuitarLocker.Models
                     },
                     Images = new List<Image>()
                     {
-                        new Image() { Title = "Les Paul Pics", Url = "www.imageurl.com", Description = "My tele leaning against a majestic tree in the woods"}
+                        new Image() { Title = "Les Paul Pics", Url = "www.imageurl.com", Description = "My tele leaning against a majestic tree in the woods"},
+                        new Image() { Title = "Lester better Pics", Url = "www.imageurl.com", Description = "My beauty leaning against a majestic tree in the woods"}
                     }
                 };
                 _context.Instruments.Add(Lester);

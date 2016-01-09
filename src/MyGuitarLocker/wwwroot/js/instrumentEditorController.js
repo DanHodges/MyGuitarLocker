@@ -8,13 +8,14 @@
         var vm = this;
         vm.InstrumentName = $routeParams.InstrumentName;
         vm.SoundClips = [];
+        vm.Images = [];
         vm.errorMessage = "";
         vm.isBusy = true;
-        vm.newSoundClip = {};
         
-        var url = "/api/Instruments/" + vm.InstrumentName + "/SoundClips";
+        var soundUrl = "/api/Instruments/" + vm.InstrumentName + "/SoundClips";
+        var picUrl = "/api/Instruments/" + vm.InstrumentName + "/Images";
 
-        $http.get(url)
+        $http.get(soundUrl)
           .then(function (response) {
               console.log("response.data", response.data);
               for (var i = 0; i < response.data.length; i++) {
@@ -34,42 +35,23 @@
               vm.isBusy = false;
           });
 
-        vm.addSoundClip = function () {
-            vm.isBusy = true;
-            $http.post(url, vm.newSoundClip)
-                .then(function (response) {
-                    //success
-                    vm.SoundClips.push(response.data);
-                    //_showMap(vm.SoundClips);
-                    vm.newSoundClip = {};
-                }, function () {
-                    //error
-                    vm.errorMessage = "Failed to save new SoundClip";
-                })
-                .finally(function () {
-                    vm.isBusy = false;
-                });
-        }
+        $http.get(picUrl)
+          .then(function (response) {
+              console.log("response.data", response.data);
+              for (var i = 0; i < response.data.length; i++) {
+                  vm.Images[i] = {
+                      title: response.data[i].title,
+                      id: response.data[i].id,
+                      description: response.data[i].description,
+                      urls : response.data[i].url.split(' ')
+                  };
+              }
+              console.log('vm.Images', vm.Images);
+          }, function (err) {
+              vm.errorMessage = "Failed to load SoundClips";
+          })
+          .finally(function () {
+              vm.isBusy = false;
+          });
     }
-
-    //function _showMap(SoundClips) {
-    //    if (SoundClips && SoundClips.length > 0) {
-    //        var mapSoundClips = _.map(SoundClips, function(item){
-    //            return {
-    //                lat : item.latitude,
-    //                long: item.longitude,
-    //                info : item.name
-    //            };
-    //        });
-    //        //show map
-    //        console.log("_showMap()");
-    //        travelMap.createMap({
-    //            SoundClips: mapSoundClips,
-    //            selector: "#map",
-    //            currentSoundClip: 1,
-    //            initialZoom: 3
-    //        });
-    //    }
-    //}
-
 })();

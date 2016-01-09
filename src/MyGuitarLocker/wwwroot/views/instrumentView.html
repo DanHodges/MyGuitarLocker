@@ -8,13 +8,18 @@
             <td><a ng-href="#/editor/{{ Instrument.name }}">Manage</a></td>
         </tr>
     </table>
-
+    <br />
     <form novalidate name="newInstrumentForm" ng-submit="vm.addInstrument()">
+        <label>Add Instrument</label>
         <div class="form-group">
-            <label for="name">Instrument Name</label>
-            <input class="form-control" id="name" name="name" ng-model="vm.newInstrument.name" required ng-minlength="5" />
-            <span ng-show="newInstrumentForm.name.$error.required" class="text-warning">Name is Required</span>
-            <span ng-show="newInstrumentForm.name.$error.minlength" class="text-warning">Name must be 8 characters</span>
+            <label for="name">Instrument Name</label><br />
+            <input class="form-control" id="name" name="name" ng-model="vm.newInstrument.name" required ng-minlength="3" /><br />
+            <label for="name">Make</label><br />
+            <input class="form-control" id="make" name="make" ng-model="vm.newInstrument.make"  /><br />
+            <label for="name">Model</label><br />
+            <input class="form-control" id="model" name="model" ng-model="vm.newInstrument.model" /><br />
+            <label for="name">Year</label><br />
+            <input class="form-control" id="year" name="year" ng-model="vm.newInstrument.year" /><br />
         </div>
         <div>
             <input type="submit" value="Add" ng-disabled="newInstrumentForm.$invalid" />

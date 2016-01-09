@@ -20,13 +20,11 @@ namespace MyGuitarLocker.Controllers.API
     {
         private IMyGuitarLockerRepository _repository;
         private ILogger<SoundClipController> _logger;
-        private CoordService _coordService;
 
-        public SoundClipController(IMyGuitarLockerRepository repository, ILogger<SoundClipController> logger, CoordService coordService )
+        public SoundClipController(IMyGuitarLockerRepository repository, ILogger<SoundClipController> logger)
         {
             _repository = repository;
             _logger = logger;
-            _coordService = coordService;
         }
 
         [HttpGet("")]
@@ -50,43 +48,55 @@ namespace MyGuitarLocker.Controllers.API
             }
         }
 
-        //public async Task<JsonResult> Post(string InstrumentName, [FromBody]SoundClipViewModel vm)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            // Map to Entity
-        //            var newSoundClip = Mapper.Map<SoundClip>(vm);
-        //            // Look up GeoCordinates
-        //            var coordResult = await _coordService.Lookup(newSoundClip.Name);
+        [Route("{user}")]
+        [HttpGet("{user}")]
+        public JsonResult Get(string InstrumentName, string user)
+        {
+            try
+            {
+                var results = _repository.GetInstrumentByName(InstrumentName, user);
+                if (results == null)
+                {
+                    return Json(null);
+                }
+                return Json(Mapper.Map<IEnumerable<SoundClipViewModel>>(results.SoundClips));
 
-        //            if (!coordResult.Success)
-        //            {
-        //                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-        //                Json(coordResult.Message);
-        //            }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get {InstrumentName}", ex.Message);
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json("an error occured");
+            }
+        }
 
-        //            newSoundClip.Longitude = coordResult.Longitude;
-        //            newSoundClip.Latitude = coordResult.Latitude;
-        //            //Save to the Database
-        //            _repository.AddSoundClip(InstrumentName, newSoundClip, User.Identity.Name);
+        public JsonResult Post(string InstrumentName, [FromBody]SoundClipViewModel vm)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    // Map to Entity
+                    var newSoundClip = Mapper.Map<SoundClip>(vm);
 
-        //            if (_repository.SaveAll())
-        //            {
-        //                Response.StatusCode = (int)HttpStatusCode.Created;
-        //                return Json(Mapper.Map<SoundClipViewModel>(newSoundClip));
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError($"Failed to get {InstrumentName}", ex.Message);
-        //        Response.StatusCode = (int)HttpStatusCode.BadRequest;
-        //        return Json("Failed to save new SoundClip");
-        //    }
-        //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-        //    return Json("Validation failed on new SoundClip");
-        //}
+                    //Save to the Database
+                    _repository.AddSoundClip(InstrumentName, newSoundClip, User.Identity.Name);
+
+                    if (_repository.SaveAll())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.Created;
+                        return Json(Mapper.Map<SoundClipViewModel>(newSoundClip));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get {InstrumentName}", ex.Message);
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json("Failed to save new SoundClip");
+            }
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json("Validation failed on new SoundClip");
+        }
     }
 }
