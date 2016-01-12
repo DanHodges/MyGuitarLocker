@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MyGuitarLocker.Models.Instrument>
+@{
+    ViewBag.Title = "Home Page";
+}
+@section Scripts {
+    <script src="~/lib/underscore/underscore-min.js"></script>
+    <script src="~/lib/angular/angular.min.js"></script>
+    <script src="~/lib/angular-route/angular-route.min.js"></script>
+    <script src="~/lib/angular-audio/app/angular.audio.js"></script>
+    <script src="~/lib/evaporatejs/evaporate.js"></script>
+    <script src="~/js/app-browse.js"></script>
+    <script src="~/js/userController.js"></script>
+    <script src="~/js/browseUsersController.js"></script>
+    <script src="~/js/browseInstrumentController.js"></script>
+
+}
+
+<div class="row" ng-app="app-browse">
+    <div ng-view></div>
+</div>

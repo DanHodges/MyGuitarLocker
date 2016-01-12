@@ -24,6 +24,10 @@ namespace MyGuitarLocker.Controllers.Web
         {
             return View();
         }
+        public IActionResult Browse()
+        {
+            return View();
+        }
 
         [Authorize]
         public IActionResult App()

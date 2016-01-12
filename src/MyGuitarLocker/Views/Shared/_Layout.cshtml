@@ -1,22 +1,26 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css" />
 </head>
 <body>
-    <h1>@ViewBag.Title</h1>
-    <ul>
-        <li><a asp-controller="App" asp-action="Index">Home</a></li>
-        <li><a asp-controller="App" asp-action="About">About</a></li>
-        <li><a asp-controller="App" asp-action="Contact">Contact</a></li>
-    </ul>
+    <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+        <a class="navbar-brand navbar-btn" asp-controller="App" asp-action="Index">MyGuitarLocker</a>
+        <ul class="nav navbar-nav pull-right">
+            <li><a class="navbar-btn pull-right" asp-controller="App" asp-action="App">Edit My Locker</a></li>
+            <li><a class="navbar-btn pull-right" asp-controller="App" asp-action="Browse">Browse</a></li>
+            <li><a class="navbar-btn pull-right" asp-controller="Auth" asp-action="Login">My Account</a></li>
+        </ul>    
+    </div>
     <div>
         @RenderBody()
     </div>
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     @RenderSection("Scripts", false)
 </body>
 </html>

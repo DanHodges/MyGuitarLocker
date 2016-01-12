@@ -6,10 +6,10 @@
     "jquery": "~2.1.4",
     "jquery-validation": "~1.14.0",
     "jquery-validation-unobtrusive": "~3.2.5",
+    "bootstrap": "~3.3.5",
     "angular": "1.4.8",
     "angular-route": "1.4.8",
-    "travelmap": "1.0.2",
-    "evaporatejs": "0.0.2",
+    "evaporatejs": "*",
     "angular-audio": "1.7.1"
   }
 }

@@ -2,7 +2,6 @@
 
     "use strict";
 
-    // Getting the existing module
     angular.module("app-Instruments")
       .controller("addInstrumentController", addInstrumentController);
 
@@ -105,16 +104,3 @@
         }; // upload
     }
 })();
-            //$http.post("/api/Instruments/" + instrument + "/Images/", vm.newInstrument)
-            //  .then(function (response) {
-            //      //success
-            //      console.log("success");
-            //      console.log("response.data :", response.data);
-            //      vm.newInstrument = {};
-            //  }, function () {
-            //      //error
-            //      vm.errorMessage = "Failed to save new Instruments";
-            //  })
-            //  .finally(function () {
-            //      vm.isBusy = false;
-            //  });

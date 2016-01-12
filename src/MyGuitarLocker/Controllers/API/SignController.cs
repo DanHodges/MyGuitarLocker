@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNet.Mvc.WebApiCompatShim;
 
-namespace Wildermuth.Controllers.API
+namespace MyGuitarLocker.Controllers.API
 {
     [Authorize]
     [Route("api/Sign")]
