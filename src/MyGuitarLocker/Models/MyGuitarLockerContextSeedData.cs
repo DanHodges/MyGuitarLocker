@@ -76,7 +76,7 @@ namespace MyGuitarLocker.Models
                     Images = new List<Image>()
                     {
                         new Image() { Title = "Open Buckers", Url = "http://www.themusiczoo.com/images/7-09-13/19002_Duane_Allman_59_Les_Paul_Washed_Cherry_VOS_DA59022_1.jpg", Description = "I really think the lack of pup covers helps high-end clarity"},
-                        new Image() { Title = "Lester better Pics", Url = "http://www.bryankimsey.com/instruments/52RI%20Tele/P1010024.JPG", Description = "Pickin' on the porch"}
+                        new Image() { Title = "Lester better Pics", Url = "http://www.vintageandrare.com/uploads/products/36660/1223742/original.jpg", Description = "Notice the flame maple top"}
                     }
                 };
                 _context.Instruments.Add(Lester);
@@ -124,7 +124,7 @@ namespace MyGuitarLocker.Models
                     Images = new List<Image>()
                     {
                         new Image() { Title = "Open Buckers", Url = "http://www.themusiczoo.com/images/7-09-13/19002_Duane_Allman_59_Les_Paul_Washed_Cherry_VOS_DA59022_1.jpg", Description = "I really think the lack of pup covers helps high-end clarity"},
-                        new Image() { Title = "Lester better Pics", Url = "http://www.bryankimsey.com/instruments/52RI%20Tele/P1010024.JPG", Description = "Pickin' on the porch"}
+                        new Image() { Title = "Lester better Pics", Url = "http://www.vintageandrare.com/uploads/products/36660/1223742/original.jpg", Description = "Notice the flame maple top"}
                     }
                 };
                 _context.Instruments.Add(LesterTwo);
@@ -172,7 +172,7 @@ namespace MyGuitarLocker.Models
                     Images = new List<Image>()
                     {
                         new Image() { Title = "Open Buckers", Url = "http://www.themusiczoo.com/images/7-09-13/19002_Duane_Allman_59_Les_Paul_Washed_Cherry_VOS_DA59022_1.jpg", Description = "I really think the lack of pup covers helps high-end clarity"},
-                        new Image() { Title = "Lester better Pics", Url = "http://www.bryankimsey.com/instruments/52RI%20Tele/P1010024.JPG", Description = "Pickin' on the porch"}
+                        new Image() { Title = "Lester better Pics", Url = "http://www.vintageandrare.com/uploads/products/36660/1223742/original.jpg", Description = "Notice the flame maple top"}
                     }
                 };
                 _context.Instruments.Add(LesterThree);
